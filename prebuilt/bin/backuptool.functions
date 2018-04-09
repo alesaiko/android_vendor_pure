@@ -1,37 +1,42 @@
 #!/sbin/sh
-#
-# Functions for backuptool.sh
-#
 
-export C=/tmp/backupdir
-export S=/system
+export C="/tmp/backupdir"
+export S="/system"
 
+backup_file()
+{
+	# Return early if there is nothing to backup
+	[ -e "$1" ] || return 1
 
-backup_file() {
-  if [ -e "$1" ]; then
-    local F=`basename "$1"`
-    local D=`dirname "$1"`
-    # dont backup any apps that have odex files, they are useless
-    if ( echo "$F" | grep -q "\.apk$" ) && [ -e `echo "$1" | sed -e 's/\.apk$/\.odex/'` ]; then
-      echo "Skipping odexed apk $1";
-    else
-      mkdir -p "$C/$D"
-      cp -p $1 "$C/$D/$F"
-    fi
-  fi
+	local FILE=$(basename "$1")
+	local DIR=$(dirname "$1")
+
+	# Do not backup any applications that have odex files
+	if (echo "$FILE" | grep -q "\.apk$") &&
+	   [ -e $(echo "$1" | sed -e 's/\.apk$/\.odex/') ]; then
+		echo "- Skipping odexed apk $1..."
+		return 2
+	fi
+
+	# Create a new subdir in backup directory and place target file there
+	[ -d "$C/$DIR" ] || mkdir -p "$C/$DIR"
+	cp -p $1 "$C/$DIR/$FILE"
 }
 
-restore_file() {
-  local FILE=`basename "$1"`
-  local DIR=`dirname "$1"`
-  if [ -e "$C/$DIR/$FILE" ]; then
-    if [ ! -d "$DIR" ]; then
-      mkdir -p "$DIR";
-    fi
-    cp -p "$C/$DIR/$FILE" "$1";
-    if [ -n "$2" ]; then
-      echo "Deleting obsolete file $2"
-      rm "$2";
-    fi
-  fi
+restore_file()
+{
+	local FILE=$(basename "$1")
+	local DIR=$(dirname "$1")
+
+	# Return early if there is nothing to restore
+	[ -e "$C/$DIR/$FILE" ] || return 1
+
+	# Ensure that target directory in system is not absent
+	[ -d "$DIR" ] || mkdir -p "$DIR"
+
+	# Restore a file from backup directory
+	cp -p "$C/$DIR/$FILE" "$1"
+
+	# Delete obsolete file if specified
+	[ -n "$2" ] && echo "- Deleting obsolete file $2..." && rm "$2"
 }

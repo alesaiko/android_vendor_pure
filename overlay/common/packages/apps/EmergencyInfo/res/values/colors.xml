@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Pure Nexus Project
+
+<!--
+     Copyright (C) 2017-2018, The Pure Nexus Project.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +17,10 @@
 -->
 
 <resources>
+
     <color name="primary_color">#ff2d2d2d</color>
     <color name="primary_dark_color">#ff242424</color>
     <color name="accent_color_light">#ff4285f4</color>
     <color name="accent_color_dark">#ff5e97f6</color>
+
 </resources>

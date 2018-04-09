@@ -1,10 +1,10 @@
-# Copyright (C) 2017 The Pure Nexus Project
+# Copyright (C) 2017-2018, The Pure Nexus Project.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#	http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,7 +23,7 @@ PRODUCT_PACKAGES += \
     Stk \
     CellBroadcastReceiver
 
-# Allow tethering without provisioning app
+# Allow tethering without provisioning application
 PRODUCT_PROPERTY_OVERRIDES += \
     net.tethering.noprovisioning=true
 

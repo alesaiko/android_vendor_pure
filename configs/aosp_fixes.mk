@@ -1,10 +1,10 @@
-# Copyright (C) 2017 The Pure Nexus Project
+# Copyright (C) 2017-2018, The Pure Nexus Project.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#	http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -25,7 +25,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.atrace.core.services=com.google.android.gms,com.google.android.gms.ui,com.google.android.gms.persistent \
     ro.setupwizard.rotation_locked=true
 
-# Camera Effects for devices without a vendor partition
+# Camera effects for devices without a vendor partition
 ifneq ($(filter shamu,$(TARGET_PRODUCT)),)
 PRODUCT_COPY_FILES +=  \
     vendor/pure/prebuilt/media/LMspeed_508.emd:system/vendor/media/LMspeed_508.emd \
